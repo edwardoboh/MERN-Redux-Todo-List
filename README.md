@@ -18,6 +18,6 @@ Reducers are functions that, given a state and action, will return a new state. 
 
 Above, the left hand side is the new state, the divergence operation (nabla dot) is the part analagous to an action as it's acting on the intial state. The action may or may not result in a different state, just like the divergence operation.
 
-In order to dispatch actions from a react component to a reducer, action creators and react component must be `connect()`ed coupled together. In this app, we couple them together by passing `connect()` an object of action creators, namely `mapDispatchToProps`. Note that `connect()` is also where you choose which state properties your react component needs from the Redux store via `mapStateToProps`.
+In order to dispatch actions from a react component to a reducer, action creators and react component must be coupled, or `connect()`ed, together. In this app, we couple them together by passing `connect()` an object of action creators, namely `mapDispatchToProps`. Note that `connect()` is also where you choose which state properties your react component needs from the Redux store via `mapStateToProps`.
 
 Once `connect()`ed, action creators are available to react components through their `props`. Actions are automatically dispatched to the reducer and, depending on the action `type`, can overwrite the app state.
