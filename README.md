@@ -1,12 +1,14 @@
-### Summary
+### Summary 📜
 
-Using [Learn The Mern Stack](https://www.youtube.com/watch?v=PBTYxXADG_k&list=PLillGF-RfqbbiTGgA77tGO426V3hRF9iE) by Traversy Media as a guide, I created this todo list web app using MongoDB, Express, React, NodeJs and Redux. I chose to work with functional components and hooks while the tutorial uses class components up to tutorial nine.
+Using [Learn The Mern Stack](https://www.youtube.com/watch?v=PBTYxXADG_k&list=PLillGF-RfqbbiTGgA77tGO426V3hRF9iE) by Traversy Media as a guide, I created this todo list web app using MongoDB, Express, React, NodeJs, and Redux. JSON Web Tokens (JWTs) were also used for authentication purposes. This app allows registered users to add and remove text based items from a list. I chose to work with functional components and hooks while the video tutorials use class components throughout its twelve segments.
+
+### Demonstration 🎮
 
 ![Preview](resources/preview.gif)
 
-### Design Explanation
+### Design Explanation 🔮
 
-Below is a diagram I made to help describe the relationship between all of these technologies. The most challenging technology to explain in this project would have to be redux. Its implementation is somewhat chaotic, but basically you have your Redux store which contains your app's state and to change it, the action/reducer pattern is used.
+Below is a diagram I made to help describe the relationship between MERN components and Redux. The most challenging technology to explain in this project would have to be Redux. Its implementation is somewhat chaotic, but basically you have your Redux store which contains your app's state and to change it, the action/reducer pattern is used.
 
 ![Preview](resources/mern_redux_layout.png)
 

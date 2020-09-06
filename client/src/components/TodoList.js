@@ -16,7 +16,7 @@ function TodoList(props) {
 
   useEffect(() => {
     props.getItems();
-  }, []);
+  }, []);// eslint-disable-line
 
   const { items } = props.item;
   function getTodoList() {
@@ -26,14 +26,19 @@ function TodoList(props) {
           {items.map(({ _id, name }) => (
             <CSSTransition key={ _id } timeout={1200} classNames="fade">
               <ListGroupItem>
-                <Button 
-                  className="remove_btn"
-                  color="danger"
-                  size="sm"
-                  onClick={() => removeName(_id)}
-                >
-                  &times;
-                </Button>
+                {
+                  props.isAuthenticated ?
+                    <Button 
+                      className="remove_btn"
+                      color="danger"
+                      size="sm"
+                      onClick={() => removeName(_id)}
+                    >
+                      &times;
+                    </Button>
+                  :
+                  null
+                }
                 {name}
               </ListGroupItem>
             </CSSTransition>
@@ -49,14 +54,16 @@ function TodoList(props) {
 // type checking props
 TodoList.propTypes = {
   getItems: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool
 }
 
 
 // selecting what properties we want from our redux state
 // item will be available through props.item above
 const mapStateToProps = (state) => ({
-  item: state.item
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 const mapDispatchToProps = {

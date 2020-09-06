@@ -1,4 +1,9 @@
 import React, {useState} from 'react';
+import RegisterModal from './auth/RegisterModal';
+import LoginModal from './auth/LoginModal';
+import Logout from './auth/Logout';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {
   Collapse,
@@ -7,14 +12,35 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Container
 } from 'reactstrap';
 
-export default function NavbarComp(props) {
+function NavbarComp(props) {
   const [show, setShow] = useState(false);
-  const link = "https://github.com/skwzrd";
 
+  const unknownUserNav = (
+    <>
+      <NavItem>
+        <RegisterModal />
+      </NavItem>
+      <NavItem>
+        <LoginModal />
+      </NavItem>
+    </>
+  );
+
+  const knownUserNav = (
+    <>
+      <NavItem>
+        <span className="navbar-text mr-3">
+          <strong> { props.auth.user ? "Welcome " + props.auth.user.name : "" }</strong>
+        </span>
+      </NavItem>
+      <NavItem>
+        <Logout />
+      </NavItem>
+    </>
+  );
 
   function getNavbar() {
     return(
@@ -25,11 +51,7 @@ export default function NavbarComp(props) {
           <NavbarToggler onClick={() => setShow(!show)} />
           <Collapse isOpen={show} navbar>
           <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink href={link}>
-                GitHub
-              </NavLink>
-            </NavItem>
+            { props.auth && props.auth.isAuthenticated ? knownUserNav : unknownUserNav }
           </Nav>
           </Collapse>
         </Container>
@@ -40,3 +62,13 @@ export default function NavbarComp(props) {
 
   return getNavbar();
 }
+
+Navbar.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(NavbarComp);

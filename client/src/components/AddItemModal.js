@@ -12,6 +12,7 @@ import {
 
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
+import PropTypes from 'prop-types';
 
 
 function AddItemModal(props) {
@@ -31,13 +32,18 @@ function AddItemModal(props) {
   function getAddItemModal() {
     return (
      <>
-        <Button
-          color="dark"
-          style={{marginBottom: '2rem'}}
-          onClick={() => setShow(!show)}
-        >
-          Add Item
-        </Button>
+        {
+          props.isAuthenticated ?
+            <Button
+              color="dark"
+              style={{marginBottom: '2rem'}}
+              onClick={() => setShow(!show)}
+            >
+              Add Item
+            </Button>
+          :
+          <h5 className="mb-3 ml-2">Log in to change items.</h5>
+        }
 
         <Modal
           isOpen={show}
@@ -75,8 +81,13 @@ function AddItemModal(props) {
   return getAddItemModal();
 }
 
+AddItemModal.propTypes = {
+  isAuthenticated: PropTypes.bool
+}
+
 const mapStateToProps = state => ({
-  item: state.item
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = {
